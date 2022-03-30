@@ -1,64 +1,57 @@
-This is a template for the EDAV final project. It is based on the template created with *File, New Project..., New Directory, Book Project using bookdown* in RStudio. 
+---
+title: "5293 Final Project Proposal"
+author: "Group 2: Yige chen yc3986, Weijia Wang ww2589"
+date: "2022/2/28"
+output: html_document
+---
+
+### 1. Question
+
+We are interested in Hawaii as our travel destination for our summer or spring break. As the tourism of Hawaii is well developed, we believe there should be enough data collected that can help us to explore the development of the tourism of Hawaii.
+
+Here we come up with three questions:
+
+1. We want to study about the features of the visitors to Hawaii. Here, the features may include their basic information like age or gender, where they are from, their travel purposes, how do they came here, etc.  
+
+- (What kind of people like going to Hawaii for vacation is Hawaii a good travel destination for students like us?)
+
+2. For our travel plan, we want to see which islands of Hawaii are more popular. What activities are more adaptable to do on different islands? And how long we should spend there considering the average time spent by other visitors.
+
+- (Can we make a perfect travel plan based on the activities of other tourists?)
+
+3. Does pandemic have an influence on the tourism of Hawaii. We may explore this question by studying if the answers of the two previous questions changed in the past two years.
+
+- (Is the tourism of Hawaii influenced by the pandemic? If it is, how bad?)
 
 
-## ABSOLUTE ESSENTIALS
+### 2. Data Source
 
-*If you have any difficulties or have feedback of any kind, please file an issue.*
+The official website of the Aloha State
 
-### Copy this template
+Data: http://dbedt.hawaii.gov/visitor/tourismdata/
 
-- [ ] 1. Click the green "Use this template" button above.  DO NOT FORK THE REPO. Choose a descriptive name for your repo, such as "federalbudget" or "AIDSdeaths".  (If you change your mind before you do any work, delete your new repo and start over.)
+A screenshot of the data panel:
+```{r}
 
-- [ ] 2. In the Description field, write: "Bookdown source files for EDAV final project".
+knitr::include_graphics("D:/【CU】2022 Spring/5293_r/Proposal/1.png")
 
-### Set up GitHub Pages	
-- [ ] 1. On the home page of your repo, click Settings. Scroll down to the GitHub pages section and change **Source** from **None** to **main**, change **/ (root)** to **/docs** folder, and click Save. Above the **Source** line, a bar will appear with your book's URL. The bar will initially be blue and indicate that your book is *ready* to be published and will change to green once it is published. Copy the URL. (Note that sometimes there is a delay until your book actually appears at that URL. If it doesn't appear after a few minutes, make a change and commit it to trigger a GitHub Pages build.)	
+```
 
-- [ ] 2. Click the gear button near "About" on the home page of the repo and paste your book URL into the **Website** field that appears on the right.
 
-### Clone the repo
 
-- [ ] 1. Clone your new repo with *File, New Project..., Version Control, Git* in RStudio.
+### 3. Links between questions and data.
 
-### Edit some key files
+We found this data by searching Hawaii Tourism public data on Google. This is the tourism data warehouse enable us to customize and download data sets about Hawaii’s tourism industry in difference perspectives.
 
-- [ ] 1. In `index.Rmd`, change YOUR TITLE HERE to your title.
+By inputting different filters and get different outputs from the warehouse, we can find data about visitor arrival, length of stay, their places of departure, destination islands and purposes of travelling from Jan 1990 to Dec 2021. And we may especially concern about the data since 2020 (the period of the pandemic). We believe the data sets contains enough information for us to answer our questions. 
 
-- [ ] 2. In `index.Rmd`, change YOUR NAMES HERE to your names.
+可以添加：
+For example:
 
-- [ ] 3. In `_bookdown.yml`, change YOUR GITHUB USERNAME to your GitHub username in the two places it appears.
+- For question 1, we can explore the features of tourists by downloading data sets containing their basic information like age, gender, departure place, travel purposes, their daily expenditure in Hawaii, etc.. If it is the majority of visitors are younger people who come from all over the world (meaning a safe place), the money their average expenditure is not high for us, then maybe we could consider Hawaii as a affordable destination.
 
-- [ ] 4. In `_bookdown.yml`, change YOUR GITHUB REPO to your GitHub repo name in the two places it appears.
+- For question 2, we can make the travel plan based on what islands do most people go, what activities do they do on each island and  the average time they spend there. All these data could be found on the official data website.
 
-(Note that 3. and 4. provide links to the `.Rmd` files of your project for editing and viewing. If you move your `.Rmd` files you will need to update these file paths. Once your book is rendered, test that the edit (pen) and view (eye) buttons work.)
-
-- [ ] 5. In `_output.yml`, change YOUR SHORT TITLE to a shortened version of your title. (Leave the "after:" line indicating that the book was published with bookdown as is.)
-
-### Render the book
-
-- [ ] 1. Install **bookdown** with `install.packages("bookdown")`. If you already have it, update to the most recent version.
-
-- [ ] 2. Render locally with `bookdown::render_book("index.Rmd")` or clicking the *Build book* button which should appear in the Build tab (in the same pane as Environment, History, Connections, ...).
-
-- [ ] 3. Use `browseURL("docs/index.html")` to view your book locally (or just open `index.html` in a browser).
-
-- [ ] 4. If it looks good, commit and push all changed files to GitHub. 
-
-(You will need to repeat steps 2 and 4 every time you wish to update the book online.)
-
-### Edit README	
-
-Once you've completed these steps, delete the content of this **README** and add a short description of your project with a link to the book URL. It would be appreciated if you add the following to the end:	
-
-*This repo was initially generated from a bookdown template available here: https://github.com/jtr13/EDAVtemplate.*	
-
-### Demo Video	
-
-A demo video showing how to create a **bookdown book** following these similar instructions: http://bit.ly/fiveminutebookdown Note that this video uses a different template.
-
-### Additional features	
-
-Please consult the official guide to **bookdown**: https://bookdown.org/yihui/bookdown
-
+- For question 3, We may explore this question by studying if the answers of the two previous questions (or the pattern of the two data sets) have changed in the past two years.
 
 
