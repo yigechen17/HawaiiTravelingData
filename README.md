@@ -7,7 +7,7 @@ output: html_document
 
 ### 1. Question
 
-We are interested in Hawaii as our travel destination for our summer or spring break. As the tourism of Hawaii is well developed, we believe there should be enough data collected that can help us to explore the development of the tourism of Hawaii.
+We are interested in Hawaii as our travel destination for our summer or spring break. As the tourism of Hawaii is well developed, we believe there should be enough data collected that can help us to explore the development of the tourism of Hawaii. w
 
 Here we come up with three questions:
 
@@ -26,16 +26,9 @@ Here we come up with three questions:
 
 ### 2. Data Source
 
-The official website of the Aloha State
+The official website of the Aloha State.
 
 Data: http://dbedt.hawaii.gov/visitor/tourismdata/
-
-A screenshot of the data panel:
-```{r}
-
-knitr::include_graphics("D:/【CU】2022 Spring/5293_r/Proposal/1.png")
-
-```
 
 
 
@@ -45,7 +38,6 @@ We found this data by searching Hawaii Tourism public data on Google. This is th
 
 By inputting different filters and get different outputs from the warehouse, we can find data about visitor arrival, length of stay, their places of departure, destination islands and purposes of travelling from Jan 1990 to Dec 2021. And we may especially concern about the data since 2020 (the period of the pandemic). We believe the data sets contains enough information for us to answer our questions. 
 
-可以添加：
 For example:
 
 - For question 1, we can explore the features of tourists by downloading data sets containing their basic information like age, gender, departure place, travel purposes, their daily expenditure in Hawaii, etc.. If it is the majority of visitors are younger people who come from all over the world (meaning a safe place), the money their average expenditure is not high for us, then maybe we could consider Hawaii as a affordable destination.
