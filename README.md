@@ -31,7 +31,6 @@ The official website of the Aloha State.
 Data: http://dbedt.hawaii.gov/visitor/tourismdata/
 
 
-
 ### 3. Links between questions and data.
 
 We found this data by searching Hawaii Tourism public data on Google. This is the tourism data warehouse enable us to customize and download data sets about Hawaii’s tourism industry in difference perspectives.
