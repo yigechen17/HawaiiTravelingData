@@ -1,1 +1,149 @@
 # Missing values
+
+```{r}
+empty_as_na <- function(x){
+    if("factor" %in% class(x)) x <- as.character(x) ## since ifelse wont work with factors
+    #ifelse(as.character(x)!="", x, NA)
+    ifelse(x!="", x, NA)
+}
+
+missing1 <- data1 %>%
+  rownames_to_column("id") %>%
+  gather(key, value, -id) %>% 
+  mutate(missing = ifelse(is.na(value), "yes", "no")) %>% 
+  group_by(key) %>% 
+  summarise(sum.na = sum(is.na(value)))
+
+#ggplot(missing1, aes(x = key, y = sum.na)) +
+#  geom_col(color = "blue", fill = "lightblue") +
+#  #scale_x_continuous(breaks = 1:28, labels = missing$key) +
+#  ggtitle("Number of missing values by day") +
+#  xlab("") +
+#  ylab("") +
+#  theme(axis.text.x = element_text(angle = 90))
+
+data1 %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number") %>%
+  mutate(missing = ifelse(is.na(number), "yes", "no")) %>%
+  ggplot(aes(x = Indicator, y = Year, fill = missing)) +
+  geom_tile(color = "white") 
+
+
+
+missing2 <- data2 %>%
+  rownames_to_column("id") %>%
+  gather(key, value, -id) %>% 
+  mutate(missing = ifelse(is.na(value), "yes", "no")) %>% 
+  group_by(key) %>% 
+  summarise(sum.na = sum(is.na(value)))
+
+#ggplot(missing2, aes(x = key, y = sum.na)) +
+#  geom_col(color = "blue", fill = "lightblue") +
+#  #scale_x_continuous(breaks = 1:28, labels = missing$key) +
+#  ggtitle("Number of missing values by day") +
+#  xlab("") +
+#  ylab("") +
+#  theme(axis.text.x = element_text(angle = 90))
+
+data2 %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number") %>%
+  mutate(missing = ifelse(is.na(number), "yes", "no")) %>%
+  ggplot(aes(x = Indicator, y = Year, fill = missing)) +
+  geom_tile(color = "white") 
+
+
+
+
+missing2.1 <- data2.1 %>%
+  rownames_to_column("id") %>%
+  gather(key, value, -id) %>% 
+  mutate(missing = ifelse(is.na(value), "yes", "no")) %>% 
+  group_by(key) %>% 
+  summarise(sum.na = sum(is.na(value)))
+
+#ggplot(missing2.1, aes(x = key, y = sum.na)) +
+#  geom_col(color = "blue", fill = "lightblue") +
+#  #scale_x_continuous(breaks = 1:28, labels = missing$key) +
+#  ggtitle("Number of missing values by day") +
+#  xlab("") +
+#  ylab("") +
+#  theme(axis.text.x = element_text(angle = 90))
+
+data2.1 %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number") %>%
+  mutate(missing = ifelse(is.na(number), "yes", "no")) %>%
+  ggplot(aes(x = Indicator, y = Year, fill = missing)) +
+  geom_tile(color = "white") 
+
+
+
+
+missing3 <- data3 %>%
+  rownames_to_column("id") %>%
+  gather(key, value, -id) %>% 
+  mutate(missing = ifelse(is.na(value), "yes", "no")) %>% 
+  group_by(key) %>% 
+  summarise(sum.na = sum(is.na(value)))
+
+#ggplot(missing3, aes(x = key, y = sum.na)) +
+#  geom_col(color = "blue", fill = "lightblue") +
+#  #scale_x_continuous(breaks = 1:28, labels = missing$key) +
+#  ggtitle("Number of missing values by day") +
+#  xlab("") +
+#  ylab("") +
+#  theme(axis.text.x = element_text(angle = 90))
+
+data3 %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number") %>%
+  mutate(missing = ifelse(is.na(number), "yes", "no")) %>%
+  ggplot(aes(x = Indicator, y = Year, fill = missing)) +
+  geom_tile(color = "white") 
+
+
+
+
+tidy4<- data4 %>%
+  rownames_to_column("id") %>%
+  gather(key, value, -id) %>% 
+  mutate(missing = ifelse(is.na(value), "yes", "no"))
+
+missing4 <- tidy4 %>% 
+    group_by(key) %>% 
+    summarise(sum.na = sum(is.na(value)))
+
+ggplot(missing4, aes(x = key, y = sum.na)) +
+  geom_col(color = "blue", fill = "lightblue") +
+  #scale_x_continuous(breaks = 1:28, labels = missing$key) +
+  ggtitle("Number of missing values by day") +
+  xlab("") +
+  ylab("") +
+  theme(axis.text.x = element_text(angle = 90))
+
+#indicator missing
+data4 %>%
+  pivot_longer(cols = -c("Group", "Indicator", "Units"),
+               names_to = "Year",
+               values_to = "number") %>%
+  mutate(missing = ifelse(is.na(number), "yes", "no")) %>%
+  ggplot(aes(x = Indicator, y = Year, fill = missing)) +
+  geom_tile(color = "white") +
+  theme(axis.text.x = element_text(angle = 90))
+
+#group missing
+data4 %>%
+  pivot_longer(cols = -c("Group", "Indicator", "Units"),
+               names_to = "Year",
+               values_to = "number") %>%
+  mutate(missing = ifelse(is.na(number), "yes", "no")) %>%
+  ggplot(aes(x = Group, y = Year, fill = missing)) +
+  geom_tile(color = "white") +
+  theme(axis.text.x = element_text(angle = 10))
+```

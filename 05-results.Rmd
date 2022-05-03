@@ -1,1 +1,99 @@
 # Results
+
+```{r}
+d4.1<- d4 %>%
+  filter(Group != "Visitor from US") %>%
+  na.omit() %>%
+  pivot_wider(names_from = Indicator, values_from = X2019) 
+  
+d4.1 %>%
+  mutate(Group = factor(Group, levels = c("Oahu visitors", 
+                                          "Maui visitors",
+                                          "Hawaii ISL visitors",
+                                          "Kauai visitors",
+                                          "Lanai visitors",
+                                          "Molokai visitors"))) %>%
+  ggplot(aes(x = Group, y = `Avg. age of party head`)) +
+  geom_col(fill = "cornflowerblue") +
+  coord_flip() 
+
+
+d4.1[,c(1,3,4)] %>%
+  pivot_longer(c(`First timer (%)`, `Repeaters (%)`), 
+               names_to ="Times of come", 
+               values_to = "percentage") %>%
+  ggplot(aes(x = Group, y = percentage, fill = `Times of come`)) +
+  geom_col() 
+
+
+
+purpose<- cbind(d4.1[,c(1)], d4.1[c(grep("Purpose",colnames(d4.1)))])%>%
+  pivot_longer(c(2:16), 
+               names_to ="Purpose", 
+               values_to = "percentage") %>%
+  mutate(Purpose = substr(Purpose, 10, 1000)) %>%
+  mutate(Purpose = gsub('.{4}$', '', Purpose)) %>%
+  filter(Purpose %in% c("Vacation", "Honeymoon/Get married", "Visit Friends/Relative")) %>%
+  pivot_wider(names_from = Purpose, 
+              values_from = percentage) %>%
+  mutate(OtherPurpose = 100 - Vacation - `Honeymoon/Get married` - `Visit Friends/Relative`) %>%
+  pivot_longer(c(2:5),
+               names_to = "Purpose",
+               values_to = "percentage")
+
+purpose %>%
+  ggplot(aes(x = Group, y = percentage, fill = Purpose)) +
+  geom_col()  +
+  theme(axis.text.x = element_text(angle = 10, vjust = 0.5, hjust=1))
+
+
+
+Accom<- cbind(d4.1[,c(1)], d4.1[c(grep("Accom",colnames(d4.1)))]) %>%
+  pivot_longer(c(2:14), 
+               names_to ="Accomodation", 
+               values_to = "percentage") %>%
+  mutate(Accomodation = substr(Accomodation, 8, 1000)) %>%
+  mutate(Accomodation = gsub('.{4}$', '', Accomodation)) %>%
+  filter(Accomodation %in% c("Hotel only", "Condo", "Friends/Relatives", "Rental house")) %>%
+  pivot_wider(names_from = Accomodation, 
+              values_from = percentage) %>%
+  mutate(OtherAccomodation = 100 - `Hotel only` - `Condo` - `Friends/Relatives` - `Rental house`) %>%
+  pivot_longer(c(2:6),
+               names_to = "Accomodation",
+               values_to = "percentage")
+
+Accom %>%
+  ggplot(aes(x = Group, y = percentage, fill = Accomodation)) +
+  geom_col() +
+    theme(axis.text.x = element_text(angle = 10, vjust = 0.5, hjust=1))
+
+library(treemap)
+
+d3<- tibble(data3[,-c(5:29)][,c(1,2,3,4,9)])
+colnames(d3)[5] <- 'Year_2019'
+d3$Year_2019<- as.numeric(gsub(",","", d3$Year_2019))
+
+d3 %>%
+  filter(Indicator == "Visitor arrivals") %>%
+  select( -c(Market, Units)) %>%
+  treemap::treemap(index=c("Destination"),
+                   vSize="Year_2019",
+                   vColor="Year_2019",
+                   type="value",
+                   title="Number of visitors to different islands",  
+                   format.legend = list(scientific = FALSE, big.mark = " ")) 
+  
+d3 %>%
+  filter(Indicator == "Length of stay") %>%
+  select( -c(Market, Units)) %>%
+  treemap::treemap(index=c("Destination"),
+                   vSize="Year_2019",
+                   vColor="Year_2019",
+                   type="value",
+                   title="Length of stay for visitors to different islands",  
+                   format.legend = list(scientific = FALSE, big.mark = " ")) 
+
+
+
+
+```

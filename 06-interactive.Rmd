@@ -1,3 +1,35 @@
 # Interactive component
 
 
+```{r}
+
+library(parcoords)  
+library(d3r)
+
+colnames(d2.1)[5] <- 'Year_2019'
+
+g<- d2.1 %>%
+  filter(Indicator == "Visitor arrivals") %>%
+  dplyr::select(Destination, Market, Year_2019) %>%
+  pivot_wider(names_from = Destination,
+              values_from = Year_2019) 
+g1 <- data.frame(t(data.frame(matrix(unlist(g), nrow=length(g), byrow=TRUE))))
+colnames(g1)<- names(g)
+
+library(GGally)
+ggparcoord(g1, columns = 2:8, scale = "center", alphaLines = .7, splineFactor = 10, groupColumn = 1) +
+ # geom_vline(xintercept = 2:7, color = "lightblue") +
+  theme(legend.title = element_text(size = 5), legend.text = element_text(size = 5))
+
+
+interactive<- g1 %>%
+  parcoords(  
+    rownames = F     #   turn off rownames from the data.frame  
+    , brushMode = "1D-axes"  
+    , reorderable = T  
+    , queue = T  
+    , withD3 = TRUE     
+  )
+interactive
+
+```

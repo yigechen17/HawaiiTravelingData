@@ -1,1 +1,57 @@
 # Data transformation
+
+```{r}
+library(tidyverse)
+library(dplyr)
+
+data1<- data1.0 %>% 
+  mutate_each(funs(empty_as_na)) %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number")  %>%
+  mutate(Year = substr(Year, 2, 1000)) %>%
+  pivot_wider(names_from = "Year",
+              values_from = "number")
+
+data2<- data2.0 %>% 
+  mutate_each(funs(empty_as_na)) %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number")  %>%
+  mutate(Year = substr(Year, 2, 1000)) %>%
+  pivot_wider(names_from = "Year",
+              values_from = "number")
+
+data2.1<- data2.10 %>% 
+  mutate_each(funs(empty_as_na)) %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number")  %>%
+  mutate(Year = substr(Year, 2, 1000)) %>%
+  pivot_wider(names_from = "Year",
+              values_from = "number")
+
+
+data3<- data3.0 %>% 
+  mutate_each(funs(empty_as_na)) %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number")  %>%
+  mutate(Year = substr(Year, 2, 1000)) %>%
+  pivot_wider(names_from = "Year",
+              values_from = "number")
+
+
+data4<- data4.0 %>%
+  pivot_longer(cols = -c("Group", "Indicator", "Units"),
+               names_to = "Year",
+               values_to = "number")  %>%
+  mutate(Year = substr(Year, 2, 1000)) %>%
+  pivot_wider(names_from = "Year",
+              values_from = "number")
+
+d1<- tibble(data1[,-c(5:21)][,-c(3)][,c(1,2,3,8)])
+d2<- tibble(data2[,-c(5:21)]) 
+d2.1<- tibble(data2.1)[,-c(5:21)][,c(1,2,3,4,8)]
+d4<- tibble(data4.0[,-c(4:19)][,c(1, 2, 8)])
+```
