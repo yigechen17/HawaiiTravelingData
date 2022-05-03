@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Data sources | YOUR TITLE HERE</title>
-  <meta name="description" content="Chapter 2 Data sources | YOUR TITLE HERE" />
-  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+  <title>Chapter 2 Data sources | Hawaii Travel Data Visualization</title>
+  <meta name="description" content="Chapter 2 Data sources | Hawaii Travel Data Visualization" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Data sources | YOUR TITLE HERE" />
+  <meta property="og:title" content="Chapter 2 Data sources | Hawaii Travel Data Visualization" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Data sources | YOUR TITLE HERE" />
+  <meta name="twitter:title" content="Chapter 2 Data sources | Hawaii Travel Data Visualization" />
   
   
   
 
-<meta name="author" content="YOUR NAMES HERE" />
+<meta name="author" content="Yige Chen, WeiJia Wang" />
 
 
-<meta name="date" content="2022-03-30" />
+<meta name="date" content="2022-05-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -69,16 +69,16 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">SHORT TITLE HERE</a></li>
+<li><a href="./">HTD</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources<span></span></a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation<span></span></a></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values<span></span></a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results<span></span></a></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component<span></span></a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion<span></span></a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -90,7 +90,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">YOUR TITLE HERE</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hawaii Travel Data Visualization</a>
           </h1>
         </div>
 
@@ -100,6 +100,24 @@
             <section class="normal" id="section-">
 <div id="data-sources" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Data sources<a href="data-sources.html#data-sources" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Together, we searched Hawaii Tourism public data on Google and found a tourism data warehouse that enables us to customize and download data sets about Hawaii’s tourism industry in difference perspectives.</p>
+<p>By inputting different filters and get different outputs from the warehouse, we found data about visitor arrival, length of stay, their places of departure, destination islands and purposes of travelling from Jan 1990 to Dec 2021. For example, for the data describing the number of visitors from different states to different islands, we can do:</p>
+<p><img src="data1%20pic.PNG" width="574" /><img src="data2%20pic.PNG" width="580" /></p>
+<p>We downloaded 5 datasets in total. Dataset1 mainly includes the number of visitor arrivaled, length of stay, total expenditure within the period they stay in Hawaii, etc. Dataset2 has only one attribute that is different to dataset1, which is the state that visitors come from. Dataset3 also adds an attribute to dataset2 which is number of visitors that go to each island of Hawaii. Dataset4 contains average age of visitors, their purpose to come to Hawaii and their accomodation choices. All of the variables are contineous variables. Data1 has 1200 observations, data2 has 6000 observations, data2.1 has 21000 observations and data4 has 4320 observations.</p>
+<p>There are two major problems about the data. Firstly, when it comes to the number of visitors choosing different accomodation and going to Hawaii for different purposes, there could be some overlaps between different categories. The way we dealt with this problem was to reallocate the categories and assign some small categories into a new category “others”. The second problem was the missing value problem. We found out that the data from 1999 to 2018 are partially missing in different dimensions, as well as the data in 2020 and 2021 due to time delay. Therefore, we decided to use the data in 2019 when analysing the first two problems, as it could be representative to most of the years (without the impact of the pandemic).</p>
+<p>Here we demonstrate the first 3 rows of data4 to provide a more intuitive understanding of what our datasets look like:</p>
+<pre><code>##           Group              Indicator   Units X1999 X2000 X2001 X2002 X2003
+## 1 Oahu visitors Avg. age of party head  number    NA    NA    NA    NA    NA
+## 2 Oahu visitors        First timer (%) percent    46  46.4    44    43    43
+## 3 Oahu visitors          Repeaters (%) percent    54  53.6    56    57    57
+##   X2004 X2005 X2006 X2007 X2008 X2009 X2010 X2011 X2012 X2013 X2014 X2015 X2016
+## 1    NA    NA    NA    NA    NA    NA    NA    NA    NA  43.9  43.6  44.2  44.1
+## 2  43.3    43  42.3  41.4  41.2  40.3  40.3  40.9  42.2  41.8  42.4  41.7  41.7
+## 3  56.7    57  57.7  58.6  58.8  59.7  59.7  59.1  57.8  58.2  57.6  58.3  58.3
+##   X2017 X2018 X2019 X2020 X2021
+## 1  44.3  44.5  44.4  44.0    NA
+## 2  40.9  39.7  38.1  34.8  36.7
+## 3  59.1  60.3  61.9  65.2  63.3</code></pre>
 
 </div>
             </section>
@@ -139,7 +157,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/02-data.Rmd",
+"link": "https://github.com/yigechen17/HawaiiTravelingData/edit/main/02-data.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -147,7 +165,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/02-data.Rmd",
+"link": "https://github.com/yigechen17/HawaiiTravelingData/blob/main/02-data.Rmd",
 "text": null
 },
 "download": null,
