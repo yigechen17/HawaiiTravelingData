@@ -1,5 +1,23 @@
 # Data sources
 
+II. Data sources
+Describe the data sources: who is responsible for collecting the data? How is it collected? If there were a choice of options, explain how you chose.
+
+Provide some basic information about the dataset: types of variables, number of records, etc.
+
+Describe any issues / problems with the data, either known or that you discover.
+
+(suggested: approximately 1 page)
+
+III. Data transformation
+Describe the process of getting the data into a form in which you could work with it in R. If your code does not lend itself to being including in the .Rmd  file, provide a link to the folder or file(s) that contain(s) that code.
+
+(suggested: approximately 1/2 page)
+
+```{r setup, include=FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
 ```{r}
 data1.0 <- read.csv("1 visitor trend-不分state.csv")[-c(7:11),]
 data2.0 <- read.csv("2 visitor trend-分state.csv")[-c(301:305),]

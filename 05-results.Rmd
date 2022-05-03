@@ -1,4 +1,90 @@
+
+```{r setup, include=FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
 # Results
+
+
+V. Results
+You have a lot of freedom to choose what to do, as long as you restrict yourselves to exploratory techniques (rather than modeling / prediction approaches). In addition, your analysis must be clearly documented and reproducible.
+
+Provide a short nontechnical summary of the most revealing findings of your analysis written for a nontechnical audience. Take extra care to clean up your graphs, ensuring that best practices for presentation are followed, as described in the  audience ready style section  below.
+
+Use subheadings as appropriate. See  Todd Schneider’s blog posts  for examples of thoughtful, informative subheadings.
+
+The number of graphs will vary by project; we suggest a target of 10. (A plot with multiple facets counts as 1 graph).  If you go over, make sure they are high quality and include commentary.  A project with 10 good graphs plus commentary will receive a better grade than a project with 10 good graphs and 10 mediocre ones.
+
+
+```{r}
+# from chapter 2&3
+data1.0 <- read.csv("1 visitor trend-不分state.csv")[-c(7:11),]
+data2.0 <- read.csv("2 visitor trend-分state.csv")[-c(301:305),]
+data2.10<- read.csv("2.1 visitor trend- state plus dest.csv")[-c(1051:1054),]
+data3.0 <- read.csv("3 destination.csv")[-c(29:32),]
+data4.0 <- read.csv("4 Q2主要数据.csv")[-c(217:221),]
+
+library(tidyverse)
+library(dplyr)
+
+empty_as_na <- function(x){
+    if("factor" %in% class(x)) x <- as.character(x) ## since ifelse wont work with factors
+    #ifelse(as.character(x)!="", x, NA)
+    ifelse(x!="", x, NA)
+}
+
+
+data1<- data1.0 %>% 
+  mutate_each(funs(empty_as_na)) %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number")  %>%
+  mutate(Year = substr(Year, 2, 1000)) %>%
+  pivot_wider(names_from = "Year",
+              values_from = "number")
+
+data2<- data2.0 %>% 
+  mutate_each(funs(empty_as_na)) %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number")  %>%
+  mutate(Year = substr(Year, 2, 1000)) %>%
+  pivot_wider(names_from = "Year",
+              values_from = "number")
+
+data2.1<- data2.10 %>% 
+  mutate_each(funs(empty_as_na)) %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number")  %>%
+  mutate(Year = substr(Year, 2, 1000)) %>%
+  pivot_wider(names_from = "Year",
+              values_from = "number")
+
+
+data3<- data3.0 %>% 
+  mutate_each(funs(empty_as_na)) %>%
+  pivot_longer(cols = -c("Market", "Indicator", "Units", "Destination"),
+               names_to = "Year",
+               values_to = "number")  %>%
+  mutate(Year = substr(Year, 2, 1000)) %>%
+  pivot_wider(names_from = "Year",
+              values_from = "number")
+
+
+data4<- data4.0 %>%
+  pivot_longer(cols = -c("Group", "Indicator", "Units"),
+               names_to = "Year",
+               values_to = "number")  %>%
+  mutate(Year = substr(Year, 2, 1000)) %>%
+  pivot_wider(names_from = "Year",
+              values_from = "number")
+
+d1<- tibble(data1[,-c(5:21)][,-c(3)][,c(1,2,3,8)])
+d2<- tibble(data2[,-c(5:21)]) 
+d2.1<- tibble(data2.1)[,-c(5:21)][,c(1,2,3,4,8)]
+d4<- tibble(data4.0[,-c(4:19)][,c(1, 2, 8)])
+```
 
 ```{r}
 d4.1<- d4 %>%
