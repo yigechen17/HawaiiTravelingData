@@ -5,10 +5,11 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 # Missing values
 
-IV. Missing values
-Describe any patterns you discover in missing values.
+"Describe any patterns you discover in missing values.
 
-(suggested: 2 graphs plus commentary)
+(suggested: 2 graphs plus commentary)“
+
+
 
 
 ```{r}
@@ -110,9 +111,10 @@ data1 %>%
   mutate(missing = ifelse(is.na(number), "yes", "no")) %>%
   ggplot(aes(x = Indicator, y = Year, fill = missing)) +
   geom_tile(color = "white") 
+```
 
 
-
+```{r}
 missing2 <- data2 %>%
   rownames_to_column("id") %>%
   gather(key, value, -id) %>% 
@@ -135,10 +137,10 @@ data2 %>%
   mutate(missing = ifelse(is.na(number), "yes", "no")) %>%
   ggplot(aes(x = Indicator, y = Year, fill = missing)) +
   geom_tile(color = "white") 
+```
 
 
-
-
+```{r}
 missing2.1 <- data2.1 %>%
   rownames_to_column("id") %>%
   gather(key, value, -id) %>% 
@@ -161,10 +163,10 @@ data2.1 %>%
   mutate(missing = ifelse(is.na(number), "yes", "no")) %>%
   ggplot(aes(x = Indicator, y = Year, fill = missing)) +
   geom_tile(color = "white") 
+```
 
 
-
-
+```{r}
 missing3 <- data3 %>%
   rownames_to_column("id") %>%
   gather(key, value, -id) %>% 
@@ -187,10 +189,10 @@ data3 %>%
   mutate(missing = ifelse(is.na(number), "yes", "no")) %>%
   ggplot(aes(x = Indicator, y = Year, fill = missing)) +
   geom_tile(color = "white") 
+```
 
 
-
-
+```{r fig.width = 7, fig.height = 7}
 tidy4<- data4 %>%
   rownames_to_column("id") %>%
   gather(key, value, -id) %>% 
@@ -217,7 +219,8 @@ data4 %>%
   ggplot(aes(x = Indicator, y = Year, fill = missing)) +
   geom_tile(color = "white") +
   theme(axis.text.x = element_text(angle = 90))
-
+```
+```{r}
 #group missing
 data4 %>%
   pivot_longer(cols = -c("Group", "Indicator", "Units"),

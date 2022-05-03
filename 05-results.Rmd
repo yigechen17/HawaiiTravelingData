@@ -5,8 +5,6 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 # Results
 
-
-V. Results
 You have a lot of freedom to choose what to do, as long as you restrict yourselves to exploratory techniques (rather than modeling / prediction approaches). In addition, your analysis must be clearly documented and reproducible.
 
 Provide a short nontechnical summary of the most revealing findings of your analysis written for a nontechnical audience. Take extra care to clean up your graphs, ensuring that best practices for presentation are followed, as described in the  audience ready style section  below.
@@ -178,8 +176,27 @@ d3 %>%
                    type="value",
                    title="Length of stay for visitors to different islands",  
                    format.legend = list(scientific = FALSE, big.mark = " ")) 
+```
 
 
+```{r}
 
+library(parcoords)  
+library(d3r)
+
+colnames(d2.1)[5] <- 'Year_2019'
+
+g<- d2.1 %>%
+  filter(Indicator == "Visitor arrivals") %>%
+  dplyr::select(Destination, Market, Year_2019) %>%
+  pivot_wider(names_from = Destination,
+              values_from = Year_2019) 
+g1 <- data.frame(t(data.frame(matrix(unlist(g), nrow=length(g), byrow=TRUE))))
+colnames(g1)<- names(g)
+
+library(GGally)
+ggparcoord(g1, columns = 2:8, scale = "center", alphaLines = .7, splineFactor = 10, groupColumn = 1) +
+ # geom_vline(xintercept = 2:7, color = "lightblue") +
+  theme(legend.title = element_text(size = 5), legend.text = element_text(size = 5))
 
 ```

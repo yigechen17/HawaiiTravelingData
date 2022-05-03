@@ -1,18 +1,17 @@
 # Data sources
 
-II. Data sources
-Describe the data sources: who is responsible for collecting the data? How is it collected? If there were a choice of options, explain how you chose.
+Together, we searched Hawaii Tourism public data on Google and found a tourism data warehouse that enables us to customize and download data sets about Hawaii’s tourism industry in difference perspectives.
 
-Provide some basic information about the dataset: types of variables, number of records, etc.
+By inputting different filters and get different outputs from the warehouse, we found data about visitor arrival, length of stay, their places of departure, destination islands and purposes of travelling from Jan 1990 to Dec 2021. For example, for the data describing the number of visitors from different states to different islands, we can do:
 
-Describe any issues / problems with the data, either known or that you discover.
+```{r}
+knitr::include_graphics("data1 pic.png")
+knitr::include_graphics("data2 pic.png")
+```
 
-(suggested: approximately 1 page)
+We downloaded 5 datasets in total. Dataset1 mainly includes the number of visitor arrivaled, length of stay, total expenditure within the period they stay in Hawaii, etc. Dataset2 has only one attribute that is different to dataset1, which is the state that visitors come from. Dataset3 also adds an attribute to dataset2 which is number of visitors that go to each island of Hawaii. Dataset4 contains average age of visitors, their purpose to come to Hawaii and their accomodation choices. All of the variables are contineous variables. Data1 has 1200 observations, data2 has 6000 observations, data2.1 has 21000 observations and data4 has 4320 observations.
 
-III. Data transformation
-Describe the process of getting the data into a form in which you could work with it in R. If your code does not lend itself to being including in the .Rmd  file, provide a link to the folder or file(s) that contain(s) that code.
-
-(suggested: approximately 1/2 page)
+There are two major problems about the data. Firstly, when it comes to the number of visitors choosing different accomodation and going to Hawaii for different purposes, there could be some overlaps between different categories. The way we dealt with this problem was to reallocate the categories and assign some small categories into a new category "others". The second problem was the missing value problem. We found out that the data from 1999 to 2018 are partially missing in different dimensions, as well as the data in 2020 and 2021 due to time delay. Therefore, we decided to use the data in 2019 when analysing the first two problems, as it could be representative to most of the years (without the impact of the pandemic).
 
 ```{r setup, include=FALSE, message = FALSE, warning = FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
@@ -25,3 +24,13 @@ data2.10<- read.csv("2.1 visitor trend- state plus dest.csv")[-c(1051:1054),]
 data3.0 <- read.csv("3 destination.csv")[-c(29:32),]
 data4.0 <- read.csv("4 Q2主要数据.csv")[-c(217:221),]
 ```
+
+Here we demonstrate the first 3 rows of data4 to provide a more intuitive understanding of what our datasets look like:
+```{r}
+head(data4.0, n=3)
+```
+
+
+
+
+

@@ -1,6 +1,5 @@
 # Conclusion
 
-VII. Conclusion
-Discuss: main takeaways of your exploration, limitations, future directions, lessons learned.
+"Discuss: main takeaways of your exploration, limitations, future directions, lessons learned.
 
-(suggested: approximately 1/2 - 1 page)
+(suggested: approximately 1/2 - 1 page)"

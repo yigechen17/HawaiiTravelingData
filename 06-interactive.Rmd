@@ -5,7 +5,6 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 # Interactive component
 
-VI. Interactive or animated component
 Select one (or more) of your key findings to present in an interactive or animated format using the language of your choice. Be thoughtful about how you use interactivity and/or animation: using these features to add value in a way that would not be possible with a static graph. Note that we take the difficulty of the language into account to a large extent: we expect a lot more from a graph created with plotly compared to D3. If you choose D3, use version 7. 
 
 Design with the goal of users walking away with a new understanding of the data and a clear understanding of the purpose of the visualization. If the tool is interactive, provide clear instructions on how the user should engage. Thoughtfulness and originality is more important than technical prowess; in all aspects of the project, think quality, not quantity. 
