@@ -23,7 +23,7 @@
 <meta name="author" content="Yige Chen, WeiJia Wang" />
 
 
-<meta name="date" content="2022-05-03" />
+<meta name="date" content="2022-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/parallel-coordinates-2.1.8/parcoords.css" rel="stylesheet" />
+<script src="libs/parcoords-binding-1.0.1/parcoords.js"></script>
+<script src="libs/d3-5.16.0/d3.min.js"></script>
 
 
 
@@ -102,7 +106,7 @@
 <h1><span class="header-section-number">Chapter 3</span> Data transformation<a href="data-transformation.html#data-transformation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>“Describe the process of getting the data into a form in which you could work with it in R. If your code does not lend itself to being including in the .Rmd file, provide a link to the folder or file(s) that contain(s) that code.”</p>
 <p>To tidy our data, firstly we chose to convert all the blank observations into NAs using a helper function “empty_as_na”. Then, we deleted redundant characters in the names of columns, for instance, all the “X”s in front of the years like “X2019”. As there are a lot of missing values through the years, we may especially concern about the data since 2019 when analyzing the first two problems. We kept the data in year 2019 using “filter” command in tidyverse package. Our code is shown below</p>
-<p>????????????????? how “provide a link to the folder or file(s) that contain(s) that code”</p>
+<p>The code of data transformation could be found in the link: <a href="https://github.com/Weijiaaaa/5293_r/blob/main/Final%20project%20Ch3%20data%20transformation" class="uri">https://github.com/Weijiaaaa/5293_r/blob/main/Final%20project%20Ch3%20data%20transformation</a></p>
 
 </div>
             </section>

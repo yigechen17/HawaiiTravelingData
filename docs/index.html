@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>YOUR TITLE HERE</title>
-  <meta name="description" content="YOUR TITLE HERE" />
-  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+  <title>Hawaii Travel Data Visualization</title>
+  <meta name="description" content="Hawaii Travel Data Visualization" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="YOUR TITLE HERE" />
+  <meta property="og:title" content="Hawaii Travel Data Visualization" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="YOUR TITLE HERE" />
+  <meta name="twitter:title" content="Hawaii Travel Data Visualization" />
   
   
   
 
-<meta name="author" content="YOUR NAMES HERE" />
+<meta name="author" content="Yige Chen, WeiJia Wang" />
 
 
-<meta name="date" content="2022-03-30" />
+<meta name="date" content="2022-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/parallel-coordinates-2.1.8/parcoords.css" rel="stylesheet" />
+<script src="libs/parcoords-binding-1.0.1/parcoords.js"></script>
+<script src="libs/d3-5.16.0/d3.min.js"></script>
 
 
 
@@ -69,16 +73,16 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">SHORT TITLE HERE</a></li>
+<li><a href="./">HTD</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources<span></span></a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation<span></span></a></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values<span></span></a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results<span></span></a></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component<span></span></a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion<span></span></a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -90,7 +94,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">YOUR TITLE HERE</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hawaii Travel Data Visualization</a>
           </h1>
         </div>
 
@@ -99,12 +103,23 @@
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">YOUR TITLE HERE</h1>
-<p class="author"><em>YOUR NAMES HERE</em></p>
-<p class="date"><em>2022-03-30</em></p>
+<h1 class="title">Hawaii Travel Data Visualization</h1>
+<p class="author"><em>Yige Chen, WeiJia Wang</em></p>
+<p class="date"><em>2022-05-05</em></p>
 </div>
 <div id="introduction" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For this report, We are interested in taking Hawaii as our travel destination for summer or spring break. As the tourism of Hawaii is well developed, we believe there should be enough data collected that can help us to explore the development of the tourism of Hawaii.</p>
+<p>Here we come up with three questions:</p>
+<ol style="list-style-type: decimal">
+<li><p>What kind of people like going to Hawaii for vacation, is Hawaii a good travel destination for students like us?</p></li>
+<li><p>Can we make a perfect travel plan based on the activities of other tourists?</p></li>
+<li><p>Is the tourism of Hawaii influenced by the pandemic? If it is, how bad?</p></li>
+</ol>
+<p>To help solve the problems, we searched Hawaii Tourism public data on Google and found a tourism data warehouse that enables us to customize and download data sets about Hawaii’s tourism industry in difference perspectives. We believe the open data website contains enough information for us to answer our questions, for example:</p>
+<p>For question 1, we can explore the features of tourists by downloading data sets containing their basic information like age, gender, departure place, travel purposes, their daily expenditure in Hawaii, etc.. If it is the majority of visitors are younger people who come from all over the world (meaning a safe place), the money their average expenditure is not high for us, then maybe we could consider Hawaii as a affordable destination.</p>
+<p>For question 2, we can make the travel plan based on what islands do most people go, what activities do they do on each island and the average time they spend there. All these data could be found on the official data website.</p>
+<p>For question 3, we may explore this question by studying if the answers of the two previous questions (or the pattern of the two data sets) have changed in the past two years. Since we have all the data from 1990 to 2021, we may not be limited to the pandemic period, but to do the data analyse for the whole time period.</p>
 
 </div>
             </section>
@@ -144,7 +159,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/index.Rmd",
+"link": "https://github.com/yigechen17/HawaiiTravelingData/edit/main/index.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -152,7 +167,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/index.Rmd",
+"link": "https://github.com/yigechen17/HawaiiTravelingData/blob/main/index.Rmd",
 "text": null
 },
 "download": null,

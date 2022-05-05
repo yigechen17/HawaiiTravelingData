@@ -23,7 +23,7 @@
 <meta name="author" content="Yige Chen, WeiJia Wang" />
 
 
-<meta name="date" content="2022-05-04" />
+<meta name="date" content="2022-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/parallel-coordinates-2.1.8/parcoords.css" rel="stylesheet" />
+<script src="libs/parcoords-binding-1.0.1/parcoords.js"></script>
+<script src="libs/d3-5.16.0/d3.min.js"></script>
 
 
 
@@ -101,12 +105,12 @@
 <div id="missing-values" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Missing values<a href="missing-values.html#missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>In this chapter, we discuss the pattern of missing values in our datasets. After carefully observing our data, we found out that data1, data2, data2.1, data3 do not have a lot of missing data. Even though they do, the missing pattern is pretty neat. Take data3 as an example, all the data from 1990 to 1997 are missing for indicators except from visitor arrivals. Therefore, we applied a heatmap for each of these datasets to show the missing patterns of the four datasets:</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="864" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-16-1.png" width="864" /></p>
 <p>From the plots we can see that data1 is only missing 8 values in Expenditure and PPPD (Per person per day spending) for 4 years. For data2, only average length of stay and visitor days in year 2021 is missing. For data2.1, the three indicators are all missing in 2021. For data3, all the data from 1990 to 1997 are missing for indicators except from visitor arrivals.</p>
 <p>The story is pretty different for data4. Intuitively speaking, data4 has a lot of missing data in different indicators and different years. Therefore, we applied 3 different plots to present the pattern of missing values in data4:</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="960" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-19-1.png" width="960" /></p>
 <p>From the histogram plot and the heatmap we can see that data for all destinations in 1999 to 2017 are greatly missing. And in the heatmap for missing data in different years and indicators shown below, we can see that the for year 2016 to 2020, no data is missing.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>In conclusion, the only years with no missing value at all should be 2018 and 2019. As the data in 2018 is too old, we chose to use the data in 2019 as our observation when analysing the first 2 problems. In problem 3 where we analyse the impact of pandemic on the tourism in Hawaii, we would use data in year 2018 to 2021.</p>
 
 </div>
