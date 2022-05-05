@@ -1,7 +1,4 @@
 
-```{r setup, include=FALSE, message = FALSE, warning = FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-```
 
 # Missing values
 

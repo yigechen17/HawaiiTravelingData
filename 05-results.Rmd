@@ -1,7 +1,4 @@
 
-```{r setup, include=FALSE, message = FALSE, warning = FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-```
 
 # Results
 
@@ -12,11 +9,11 @@ The graphs and comments are shown below.
 
 ```{r}
 # from chapter 2&3
-data1.0 <- read.csv("1 visitor trend-不分state.csv")[-c(7:11),]
-data2.0 <- read.csv("2 visitor trend-分state.csv")[-c(301:305),]
-data2.10<- read.csv("2.1 visitor trend- state plus dest.csv")[-c(1051:1054),]
-data3.0 <- read.csv("3 destination.csv")[-c(29:32),]
-data4.0 <- read.csv("4 Q2主要数据.csv")[-c(217:221),]
+data1.0 <- read.csv("data/raw/1 visitor trend-不分state.csv")[-c(7:11),]
+data2.0 <- read.csv("data/raw/2 visitor trend-分state.csv")[-c(301:305),]
+data2.10<- read.csv("data/raw/2.1 visitor trend- state plus dest.csv")[-c(1051:1054),]
+data3.0 <- read.csv("data/raw/3 destination.csv")[-c(29:32),]
+data4.0 <- read.csv("data/raw/4 Q2主要数据.csv")[-c(217:221),]
 
 library(tidyverse)
 library(dplyr)
@@ -122,6 +119,8 @@ d4.1[,c(1,3,4)] %>%
 From the horizontal barchart we can see that the average age of people that come to Hawaii is 40 to 50 years old. Among all destinations, people who go to Molokai and Lanai are generally older, and people who go to Oahu and Maui island tend to be younger. Also, from the stacked barchart that shows how many visitors come to Hawaii for the first time and how many people have come several times, we can see that more than 60% of people are repeaters, which means that Hawaii is an attractive destination for people who are middle age, and they would always like to come again. Among all the islands in Hawaii, Maui and Kauai islands have the most repeaters, while Lanai island has the lest repeaters.
 
 
+Apart from the features above, we are also curious about whether people from different states have a preference in going to different islands. We firstly build a map to see how many people from different state are coming to Hawaii. The deeper the color, the more people from the state are coming:
+
 ```{r}
 rawdata2 = read.csv("data/raw/2 visitor trend-bystate.csv")
 ```
@@ -189,6 +188,36 @@ tm_shape(visitors_by_state3, bbox = mainstate) +
 ```
 
 The map clearly shows the number of Hawaii visitors coming from different states over the states' census population in 2019. By looking at the darkness of the red color, we can find Alaska had the highest Hawaii travel rate in 2019, which is far higher than that of the other states. And there is a rough rule: north and west states tend to have higher Hawaii travel rate. This follows our common sense that people living closer to the destination or living under a colder temperature may have a higher willing to take a holiday in Hawaii. 
+
+Then, We applied a static parallel coordinates plot for further analysis:
+
+```{r fig.width = 10, fig.height = 5}
+
+library(parcoords)  
+library(d3r)
+
+colnames(d2.1)[5] <- 'Year_2019'
+
+g<- d2.1 %>%
+  filter(Indicator == "Visitor arrivals") %>%
+  dplyr::select(Destination, Market, Year_2019) %>%
+  pivot_wider(names_from = Destination,
+              values_from = Year_2019) 
+g1 <- data.frame(t(data.frame(matrix(unlist(g), nrow=length(g), byrow=TRUE))))
+colnames(g1)<- names(g)
+
+library(GGally)
+ggparcoord(g1, columns = 2:8, scale = "center", alphaLines = .7, splineFactor = 10, groupColumn = 1) +
+ # geom_vline(xintercept = 2:7, color = "lightblue") +
+  theme(legend.title = element_text(size = 5), legend.text = element_text(size = 5)) +
+  labs(title = "Parallel coordinate plot of people from different states going to different destinations",
+       x = "Destination")
+
+```
+
+
+From the plot we can see that there is no outlier in this dataset. However there are some obvious clusters shown in the plot. For example, Maine, New York, New Jersey, Utha and Vergina is clearly a cluster.To gain a better vision of the parallal coordinate plot, we applied an interactive parallel coordinates plot for the same data:
+
 
 **2. Why do people come here**
 
@@ -289,37 +318,6 @@ From the two tree maps we can see that most people would visit to Oahu island, t
 
 
 
-**5. Do people from different states have a preference of different destinations?**
-
-Apart from the features above, we are also curious about whether people from different states have a preference in going to different islands. We applied a static parallel coordinates plot to analyse this problem.
-
-```{r fig.width = 10, fig.height = 5}
-
-library(parcoords)  
-library(d3r)
-
-colnames(d2.1)[5] <- 'Year_2019'
-
-g<- d2.1 %>%
-  filter(Indicator == "Visitor arrivals") %>%
-  dplyr::select(Destination, Market, Year_2019) %>%
-  pivot_wider(names_from = Destination,
-              values_from = Year_2019) 
-g1 <- data.frame(t(data.frame(matrix(unlist(g), nrow=length(g), byrow=TRUE))))
-colnames(g1)<- names(g)
-
-library(GGally)
-ggparcoord(g1, columns = 2:8, scale = "center", alphaLines = .7, splineFactor = 10, groupColumn = 1) +
- # geom_vline(xintercept = 2:7, color = "lightblue") +
-  theme(legend.title = element_text(size = 5), legend.text = element_text(size = 5)) +
-  labs(title = "Parallel coordinate plot of people from different states going to different destinations",
-       x = "Destination")
-
-```
-
-
-From the plot we can see that there is no outlier in this dataset. However there are some obvious clusters shown in the plot. For example, Maine, New York, New Jersey, Utha and Vergina is clearly a cluster.To gain a better vision of the parallal coordinate plot, we applied an interactive parallel coordinates plot for the same data:
-
 ```{r}
 interactive<- g1 %>%
   parcoords(  
@@ -334,7 +332,7 @@ interactive
 
 From this interactive plot, the clustering pattern is much easier to observe. For example, Now we can see that Texas, Oklahoma, Kansas, Lowa and Connecicut are clearly a cluster as people from these states would all like to go to Kauai and Kona island instead of Oahu and Maui island.
 
-**How does the total expenditure and visitor number of the US change by years in Hawaii?**
+**5. How does the total expenditure and visitor number of the US change by years in Hawaii?**
 
 The goal of this part is to plot the expenditure and visitor number over time and find some long-term trends or patterns.
 
@@ -374,7 +372,7 @@ g
 We can find the US total expenditure in Hawaii mainly follows a increasing trend. Possible reasons can be the thrive of the tourism in Hawaii and inflation. There is a notable decrease in the US total expenditure from 2007 to 2009. Similar to our homework question, the financial crisis of 2008 may be able to explain this decrease. And the expenditure data of 2020 is missing for some reason, which makes us unable to check the influence of the pandemic to the US total expenditure. But at least we can see the expenditure of 2021 still followed the increase trend.
 Similarly, the US total visitors in Hawaii also follows a increasing trend with the same decrease from 2007 to 2009. This time we have the 2020 data. And we can find there did exist a huge decrease in the number of visitors to Hawaii on 2020. The pandemic had a great influence to the visitor number.
 
-**How does the total number of visitors change in seasons?**
+**6. How does the total number of visitors change in seasons?**
 After looking at the long-term trend in the previous section, we want to see some seasonality here. We will plot and compare the total number of visitors versus months.
 
 ```{r}
