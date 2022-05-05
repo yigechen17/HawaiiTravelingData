@@ -1,4 +1,4 @@
-Time,Visitor arrivals,Avg. party size,Avg. age of party head,Avg. number of ISL visited,First timer (%),LOS Statewide,Accom: Hotel (%),Purpose: Vacation (%),Purpose: Honeymoon/Get married (%),Purpose: MCI-net (%),Accom: B&B (%),Purpose: Visit Friends/Relative (%)
+Time,Visitor_arrivals,Avg._party_size,Avg._age_of_party_head,Avg._number_of_ISL_visited,First_timer_(%),LOS_Statewide,Accom:_Hotel_(%),Purpose:_Vacation_(%),Purpose:_Honeymoon/Get_married_(%),Purpose:_MCI-net_(%),Accom:_B&B_(%),Purpose:_Visit Friends/Relative_(%)
 2018/1/1,483411,1.9,48.3,1.2,22.8,10.7,52.2,77.5,3.2,7.5,1.5,10.4
 2018/2/1,469341,2,48.2,1.2,24.6,9.5,53.3,79.5,2.9,7.4,1.5,10.8
 2018/3/1,577943,2.2,46.9,1.2,26.2,8.8,54.4,82.3,2.5,4.6,1.1,9.9
