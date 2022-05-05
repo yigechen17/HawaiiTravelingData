@@ -82,10 +82,9 @@ d4<- tibble(data4.0[,-c(4:19)][,c(1, 2, 8)])
 
 
 
+## 1. What kind of people would come to Hawaii?
 
-**1. What kind of people would come to Hawaii?**
-
-We analyse this question by exploring the average age of people who come to Hawaii and the percentage of people who come more than one time.
+We analyse this question by exploring the average age of people who come to Hawaii, the percentage of people who come more than one time, and the Hawaii travel rate of the states.
 
 ```{r fig.width = 10, fig.height = 5}
 d4.1<- d4 %>%
@@ -122,6 +121,75 @@ d4.1[,c(1,3,4)] %>%
 From the horizontal barchart we can see that the average age of people that come to Hawaii is 40 to 50 years old. Among all destinations, people who go to Molokai and Lanai are generally older, and people who go to Oahu and Maui island tend to be younger. Also, from the stacked barchart that shows how many visitors come to Hawaii for the first time and how many people have come several times, we can see that more than 60% of people are repeaters, which means that Hawaii is an attractive destination for people who are middle age, and they would always like to come again. Among all the islands in Hawaii, Maui and Kauai islands have the most repeaters, while Lanai island has the lest repeaters.
 
 
+```{r}
+# data cleaning example
+rawdata2 = read.csv("data/raw/2 visitor trend-bystate.csv")
+```
+
+```{r,include=FALSE}
+#tmap data preprocess
+visitors_by_state = rawdata2 %>% filter(Indicator == "Visitor arrivals", Destination == "Statewide")
+names(visitors_by_state)[names(visitors_by_state) == 'Market'] = "NAME"
+
+library(tigris)
+# The US map used here is in package tigris. Year = 2019. 
+state = states( year = 2019) %>%shift_geometry(position = "outside")
+
+visitors_by_state$NAME[!visitors_by_state$NAME %in% state$NAME]
+state$NAME[!state$NAME%in% visitors_by_state$NAME]
+
+#Correct different naming in the key for the join process
+visitors_by_state[,"NAME"][visitors_by_state[,"NAME"] == "N. Carolina"] <- "North Carolina"
+visitors_by_state[,"NAME"][visitors_by_state[,"NAME"] == "N. Dakota"] <- "North Dakota"
+visitors_by_state[,"NAME"][visitors_by_state[,"NAME"] == "S. Carolina"] <- "South Carolina"
+visitors_by_state[,"NAME"][visitors_by_state[,"NAME"] == "Washington, D.C."] <- "District of Columbia"
+visitors_by_state[,"NAME"][visitors_by_state[,"NAME"] == "S. Dakota"] <- "South Dakota"
+visitors_by_state[,"NAME"][visitors_by_state[,"NAME"] == "W. Virginia"] <- "West Virginia"
+
+```
+
+
+```{r}
+# 2019 census-us-population-data-by-state
+#https://www.kaggle.com/datasets/peretzcohen/2019-census-us-population-data-by-state?resource=download
+
+state_population_raw = read.csv("data/raw/2019_Census_US_Population_Data_By_State_Lat_Long.csv")
+```
+
+```{r}
+state_population = state_population_raw[,1:2]
+names(state_population)[names(state_population) == 'STATE'] = "NAME"
+```
+
+```{r, include=FALSE}
+state2 =state %>% filter(NAME %in% visitors_by_state$NAME)
+visitors_by_state2 = left_join(state2,visitors_by_state)
+visitors_by_state2$X2019 = as.numeric(gsub(",","",visitors_by_state2$X2019))
+
+
+visitors_by_state3 = left_join(visitors_by_state2, state_population) %>%
+  mutate(hawaii_travel_rate = X2019/POPESTIMATE2019)
+```
+
+```{r, include=FALSE}
+library(sf)
+library(tmap)
+state2 =state %>% filter(NAME %in% visitors_by_state$NAME)
+visitors_by_state2 = left_join(state2,visitors_by_state)
+visitors_by_state2$X2019 = as.numeric(gsub(",","",visitors_by_state2$X2019))
+
+mainstate <-st_bbox(state %>% filter(NAME %in% visitors_by_state$NAME))
+```
+
+```{r}
+tmap_mode("plot")
+tm_shape(visitors_by_state3, bbox = mainstate) +
+  tm_polygons("hawaii_travel_rate", palette = "Reds",breaks = seq(0,.14,.01)) +
+   tm_text("STUSPS", size = .5,remove.overlap =  T)+
+    tm_layout(main.title = "2019 Hawaii Travel Rate of States",  main.title.position = c("center","top"))
+```
+
+The map clearly shows the number of Hawaii visitors coming from different states over the states' census population in 2019. By looking at the darkness of the red color, we can find Alaska had the highest Hawaii travel rate in 2019, which is far higher than that of the other states. And there is a rough rule: north and west states tend to have higher Hawaii travel rate. This follows our common sense that people living closer to the destination or living under a colder temperature may have a higher willing to take a holiday in Hawaii. 
 
 **2. Why do people come here**
 
@@ -266,3 +334,6 @@ interactive
 ```
 
 From this interactive plot, the clustering pattern is much easier to observe. For example, Now we can see that Texas, Oklahoma, Kansas, Lowa and Connecicut are clearly a cluster as people from these states would all like to go to Kauai and Kona island instead of Oahu and Maui island.
+
+## People in which states like to visit Hawaii?
+
