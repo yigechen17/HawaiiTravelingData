@@ -1,8 +1,6 @@
 ---
-title: "5293 Final Project Proposal"
+title: "5293 Final Project"
 author: "Group 2: Yige chen yc3986, Weijia Wang ww2589"
-date: "2022/2/28"
-output: html_document
 ---
 
 ### 1. Question

@@ -5,7 +5,6 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 # Results
 
-
 From our analysis, we found out that most people come to Hawaii for vacation, and most of them would choose to come again. As for the Accommodation choice, people tend to rest in hotels and condos. For the destination, Oahu island and Maui island are the most popular ones, while people would spend similar time spending in Oahu, Maui, Kona and Kauai island. Lanai island seems to be the least popular island among all. We have also found that visitors from Illinois, Idaho, Georgia, Florida and some other southern states could have a clustering pattern when it comes to their destinations. The graphs and comments are shown below.
 
 
@@ -181,8 +180,7 @@ visitors_by_state2$X2019 = as.numeric(gsub(",","",visitors_by_state2$X2019))
 mainstate <-st_bbox(state %>% filter(NAME %in% visitors_by_state$NAME))
 ```
 
-```{r}
-tmap_mode("plot")
+```{r, warning = FALSE}
 tm_shape(visitors_by_state3, bbox = mainstate) +
   tm_polygons("hawaii_travel_rate", palette = "Reds",breaks = seq(0,.14,.01)) +
    tm_text("STUSPS", size = .5,remove.overlap =  T)+
