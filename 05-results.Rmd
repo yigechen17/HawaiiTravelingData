@@ -81,7 +81,7 @@ d4<- tibble(data4.0[,-c(4:19)][,c(1, 2, 8)])
 
 
 
-## 1. What kind of people would come to Hawaii?
+**1. What kind of people would come to Hawaii?**
 
 We analyse this question by exploring the average age of people who come to Hawaii, the percentage of people who come more than one time, and the Hawaii travel rate of the states.
 
@@ -121,7 +121,6 @@ From the horizontal barchart we can see that the average age of people that come
 
 
 ```{r}
-# data cleaning example
 rawdata2 = read.csv("data/raw/2 visitor trend-bystate.csv")
 ```
 
@@ -333,5 +332,76 @@ interactive
 
 From this interactive plot, the clustering pattern is much easier to observe. For example, Now we can see that Texas, Oklahoma, Kansas, Lowa and Connecicut are clearly a cluster as people from these states would all like to go to Kauai and Kona island instead of Oahu and Maui island.
 
-## People in which states like to visit Hawaii?
+**How does the total expenditure and visitor number of the US change by years in Hawaii?**
+
+The goal of this part is to plot the expenditure and visitor number over time and find some long-term trends or patterns.
+
+```{r}
+exp_data = pivot_longer(data1[3,],cols = 5:ncol(data1)) 
+visit_data = pivot_longer(data1[1,],cols = 5:ncol(data1)) 
+colnames(visit_data)[6] = "visit"
+
+time_data = cbind(visit_data,exp_data$value)
+colnames(time_data)[7] = "value"
+```
+
+```{r}
+library(lubridate)
+time_data$name = ymd(paste(as.character(time_data$name),"01","01",sep = ","))
+time_data$value =  as.numeric(gsub(",","",time_data$value))
+time_data$visit =  as.numeric(gsub(",","",time_data$visit))/1000
+```
+
+```{r}
+g = ggplot(time_data, aes(name, visit)) +
+  geom_point()+
+  geom_point(aes(name, value))+
+  geom_smooth(formula = y ~ x,method = "loess", span = .2, se = FALSE) + 
+  geom_smooth(aes(name, value),formula = y ~ x,method = "loess", span = .4, se = FALSE, color = "red") + 
+  ggtitle("US Total Visitor Number and Expenditure in Hawaii by Years") +
+  scale_x_date(date_breaks = "5 years", date_labels = "%Y") +
+  xlab("year")+
+  ylab("Visitor in thousand / Expenditure in $ mil")+
+  annotate("rect",xmin = ymd("2007-01-01"), xmax = ymd("2009-01-01"), ymin = -Inf, ymax = Inf, fill = "green", color = "green", alpha = .2) + 
+  annotate("text",x = ymd("2009-02-01"), y = 11000, label = "2007-2009", hjust = 0, color = "green") +
+  annotate("text",x = ymd("2018-12-01"), y = 11000, label = "Missing data \n on 2020", hjust = 0, color = "red")
+
+g
+```
+
+We can find the US total expenditure in Hawaii mainly follows a increasing trend. Possible reasons can be the thrive of the tourism in Hawaii and inflation. There is a notable decrease in the US total expenditure from 2007 to 2009. Similar to our homework question, the financial crisis of 2008 may be able to explain this decrease. And the expenditure data of 2020 is missing for some reason, which makes us unable to check the influence of the pandemic to the US total expenditure. But at least we can see the expenditure of 2021 still followed the increase trend.
+Similarly, the US total visitors in Hawaii also follows a increasing trend with the same decrease from 2007 to 2009. This time we have the 2020 data. And we can find there did exist a huge decrease in the number of visitors to Hawaii on 2020. The pandemic had a great influence to the visitor number.
+
+**How does the total number of visitors change in seasons?**
+After looking at the long-term trend in the previous section, we want to see some seasonality here. We will plot and compare the total number of visitors versus months.
+
+```{r}
+visit_month = read.csv("data/raw/month_visitor.csv")
+visit_month = pivot_longer(visit_month[1,],cols = 5:ncol(visit_month)) 
+```
+
+```{r}
+visit_month = visit_month %>% mutate("year" = substr(visit_month$name, 2, 5),
+                                     "month" = substr(visit_month$name, 7,9) )
+visit_month$value =  as.numeric(gsub(",","",visit_month$value))
+visit_month$year = as.numeric(visit_month$year)
+visit_month$month = as.numeric(visit_month$month)
+visit_month = visit_month %>% filter(year %in% c(2000,2005,2010,2015,2020))
+
+```
+
+```{r}
+g4 = ggplot(visit_month, aes(as.integer(month), value)) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous("month", breaks = seq(1,12,1))+
+  ylab("Number of visitors in month")+
+  ggtitle("Seasonality of Visitor Number in Hawaii")+
+  facet_grid(year~., scales = "free_y")
+
+g4
+```
+
+We can find that in the years without the pandemic, July is the peak of the visitor number, and March is another smaller peak. And the smallest visitor number occurs on September or January. We can find July and March represent summer holiday and spring holiday respectively. September and January represent the end of summer holiday and winter holiday respectively. It is very interesting to find the off seasons occur right after the holidays. 2020 is the special year with the pandemic. We know Covid started in the US at around March 2020. And we can find the visitor number rapidly decreased to around 0 and lasted for more than 5 months. We can find the impact of the pandemic clearly.
+
 
