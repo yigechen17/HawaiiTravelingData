@@ -5,13 +5,8 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 # Results
 
-You have a lot of freedom to choose what to do, as long as you restrict yourselves to exploratory techniques (rather than modeling / prediction approaches). In addition, your analysis must be clearly documented and reproducible.
 
-Provide a short nontechnical summary of the most revealing findings of your analysis written for a nontechnical audience. Take extra care to clean up your graphs, ensuring that best practices for presentation are followed, as described in the  audience ready style section  below.
-
-Use subheadings as appropriate. See  Todd Schneider’s blog posts  for examples of thoughtful, informative subheadings.
-
-The number of graphs will vary by project; we suggest a target of 10. (A plot with multiple facets counts as 1 graph).  If you go over, make sure they are high quality and include commentary.  A project with 10 good graphs plus commentary will receive a better grade than a project with 10 good graphs and 10 mediocre ones.
+From our analysis, we found out that most people come to Hawaii for vacation, and most of them would choose to come again. As for the Accommodation choice, people tend to rest in hotels and condos. For the destination, Oahu island and Maui island are the most popular ones, while people would spend similar time spending in Oahu, Maui, Kona and Kauai island. Lanai island seems to be the least popular island among all. We have also found that visitors from Illinois, Idaho, Georgia, Florida and some other southern states could have a clustering pattern when it comes to their destinations. The graphs and comments are shown below.
 
 
 ```{r}
@@ -84,7 +79,15 @@ d2.1<- tibble(data2.1)[,-c(5:21)][,c(1,2,3,4,8)]
 d4<- tibble(data4.0[,-c(4:19)][,c(1, 2, 8)])
 ```
 
-```{r}
+
+
+
+
+**1. What kind of people would come to Hawaii?**
+
+We analyse this question by exploring the average age of people who come to Hawaii and the percentage of people who come more than one time.
+
+```{r fig.width = 10, fig.height = 5}
 d4.1<- d4 %>%
   filter(Group != "Visitor from US") %>%
   na.omit() %>%
@@ -99,7 +102,10 @@ d4.1 %>%
                                           "Molokai visitors"))) %>%
   ggplot(aes(x = Group, y = `Avg. age of party head`)) +
   geom_col(fill = "cornflowerblue") +
-  coord_flip() 
+  coord_flip() +
+  labs(title = "Age distribution of people to different islands",
+       x = "Average age",
+       y = "Destination")
 
 
 d4.1[,c(1,3,4)] %>%
@@ -107,10 +113,20 @@ d4.1[,c(1,3,4)] %>%
                names_to ="Times of come", 
                values_to = "percentage") %>%
   ggplot(aes(x = Group, y = percentage, fill = `Times of come`)) +
-  geom_col() 
+  geom_col()  +
+  labs(title = "Will people travel to Hawaii again? If they do, which island is more popular?",
+       x = "Destination",
+       y = "Percentage")
+```
+
+From the horizontal barchart we can see that the average age of people that come to Hawaii is 40 to 50 years old. Among all destinations, people who go to Molokai and Lanai are generally older, and people who go to Oahu and Maui island tend to be younger. Also, from the stacked barchart that shows how many visitors come to Hawaii for the first time and how many people have come several times, we can see that more than 60% of people are repeaters, which means that Hawaii is an attractive destination for people who are middle age, and they would always like to come again. Among all the islands in Hawaii, Maui and Kauai islands have the most repeaters, while Lanai island has the lest repeaters.
 
 
 
+**2. Why do people come here**
+
+Secondly, we are curious about the reason why people come to Hawaii:
+```{r}
 purpose<- cbind(d4.1[,c(1)], d4.1[c(grep("Purpose",colnames(d4.1)))])%>%
   pivot_longer(c(2:16), 
                names_to ="Purpose", 
@@ -128,36 +144,59 @@ purpose<- cbind(d4.1[,c(1)], d4.1[c(grep("Purpose",colnames(d4.1)))])%>%
 purpose %>%
   ggplot(aes(x = Group, y = percentage, fill = Purpose)) +
   geom_col()  +
-  theme(axis.text.x = element_text(angle = 10, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 10, vjust = 0.5, hjust=1)) +
+  labs(title = "Purpose of people going to different islands",
+       x = "Destination",
+       y = "Percentage")
+```
 
 
+There are 4 major reasons for people to go to Hawaii islands: for vacation, to visit friends or relatives, for honeymoon or get married and for other purposes. From the plot we can see that most people go to Hawaii for vacation. The second major reason is that people go there to visit friends and relatives. Among the 6 islands, Molokai island has the most visitors who go there to visit friends and relatives, while Maui island has the least. The number of people that go to Oahu for honeymoon or get married is the most comparing to other islands.
 
+
+**3. Where do people live during their visit?**
+
+Accommodation is also pretty important when we plan a trip. Should we rent a cabin, or should we live in a hotel? The accommodations that most people choose could be a safer choice for us.
+
+```{r}
 Accom<- cbind(d4.1[,c(1)], d4.1[c(grep("Accom",colnames(d4.1)))]) %>%
   pivot_longer(c(2:14), 
-               names_to ="Accomodation", 
+               names_to ="Accommodation", 
                values_to = "percentage") %>%
-  mutate(Accomodation = substr(Accomodation, 8, 1000)) %>%
-  mutate(Accomodation = gsub('.{4}$', '', Accomodation)) %>%
-  filter(Accomodation %in% c("Hotel only", "Condo", "Friends/Relatives", "Rental house")) %>%
-  pivot_wider(names_from = Accomodation, 
+  mutate(Accommodation = substr(Accommodation, 8, 1000)) %>%
+  mutate(Accommodation = gsub('.{4}$', '', Accommodation)) %>%
+  filter(Accommodation %in% c("Hotel only", "Condo", "Friends/Relatives", "Rental house")) %>%
+  pivot_wider(names_from = Accommodation, 
               values_from = percentage) %>%
-  mutate(OtherAccomodation = 100 - `Hotel only` - `Condo` - `Friends/Relatives` - `Rental house`) %>%
+  mutate(OtherAccommodation = 100 - `Hotel only` - `Condo` - `Friends/Relatives` - `Rental house`) %>%
   pivot_longer(c(2:6),
-               names_to = "Accomodation",
+               names_to = "Accommodation",
                values_to = "percentage")
 
 Accom %>%
-  ggplot(aes(x = Group, y = percentage, fill = Accomodation)) +
+  ggplot(aes(x = Group, y = percentage, fill = Accommodation)) +
   geom_col() +
-    theme(axis.text.x = element_text(angle = 10, vjust = 0.5, hjust=1))
+    theme(axis.text.x = element_text(angle = 10, vjust = 0.5, hjust=1))+
+  labs(title = "Accommodation of people going to different islands",
+       x = "Destination",
+       y = "Percentage")
+```
 
+From the stacked barchart we can see that the most popular accommodation is hotel and condos are pretty welcome too. Accommodation choices vary from island to island. For Oahu island, the percentage of people who live in hotel outperforms all the other islands, and for Maui island the number of people living in Condos outperforms other islands. 
+
+
+**4. Which island is more popular?**
+
+Now we would like to decide which island we would like to go if our travel time is limit by plotting the number of visitors and the length of them to stay in different islands.
+
+```{r}
 library(treemap)
 
 d3<- tibble(data3[,-c(5:29)][,c(1,2,3,4,9)])
 colnames(d3)[5] <- 'Year_2019'
 d3$Year_2019<- as.numeric(gsub(",","", d3$Year_2019))
 
-d3 %>%
+ d3 %>%
   filter(Indicator == "Visitor arrivals") %>%
   select( -c(Market, Units)) %>%
   treemap::treemap(index=c("Destination"),
@@ -167,7 +206,7 @@ d3 %>%
                    title="Number of visitors to different islands",  
                    format.legend = list(scientific = FALSE, big.mark = " ")) 
   
-d3 %>%
+ d3 %>%
   filter(Indicator == "Length of stay") %>%
   select( -c(Market, Units)) %>%
   treemap::treemap(index=c("Destination"),
@@ -179,7 +218,15 @@ d3 %>%
 ```
 
 
-```{r}
+From the two tree maps we can see that most people would visit to Oahu island, then Maui island. Kauai and Kona island are the next popular islands, and Hilo is not as popular as the others. Lanai island is the least popular one. But in terms of length of stay, people who visit Maui iland would stay for the longest time which is approximately 8 days, then Oahu, Kauai and Kona islands have similar length of stay of approximately 6 to 7.5 days. People would stay in Molokai, Hilo and Lanai islands for much less time, which is less than 5 days.
+
+
+
+**5. Do people from different states have a preference of different destinations?**
+
+Apart from the features above, we are also curious about whether people from different states have a preference in going to different islands. We applied a static parallel coordinates plot to analyse this problem.
+
+```{r fig.width = 10, fig.height = 5}
 
 library(parcoords)  
 library(d3r)
@@ -197,6 +244,25 @@ colnames(g1)<- names(g)
 library(GGally)
 ggparcoord(g1, columns = 2:8, scale = "center", alphaLines = .7, splineFactor = 10, groupColumn = 1) +
  # geom_vline(xintercept = 2:7, color = "lightblue") +
-  theme(legend.title = element_text(size = 5), legend.text = element_text(size = 5))
+  theme(legend.title = element_text(size = 5), legend.text = element_text(size = 5)) +
+  labs(title = "Parallel coordinate plot of people from different states going to different destinations",
+       x = "Destination")
 
 ```
+
+
+From the plot we can see that there is no outlier in this dataset. However there are some obvious clusters shown in the plot. For example, Maine, New York, New Jersey, Utha and Vergina is clearly a cluster.To gain a better vision of the parallal coordinate plot, we applied an interactive parallel coordinates plot for the same data:
+
+```{r}
+interactive<- g1 %>%
+  parcoords(  
+    rownames = F     #   turn off rownames from the data.frame  
+    , brushMode = "1D-axes"  
+    , reorderable = T  
+    , queue = T  
+    , withD3 = TRUE     
+  )
+interactive
+```
+
+From this interactive plot, the clustering pattern is much easier to observe. For example, Now we can see that Texas, Oklahoma, Kansas, Lowa and Connecicut are clearly a cluster as people from these states would all like to go to Kauai and Kona island instead of Oahu and Maui island.
