@@ -124,7 +124,7 @@ From the horizontal barchart we can see that the average age of people that come
 rawdata2 = read.csv("data/raw/2 visitor trend-bystate.csv")
 ```
 
-```{r,include=FALSE}
+```{r}
 #tmap data preprocess
 visitors_by_state = rawdata2 %>% filter(Indicator == "Visitor arrivals", Destination == "Statewide")
 names(visitors_by_state)[names(visitors_by_state) == 'Market'] = "NAME"
@@ -159,7 +159,7 @@ state_population = state_population_raw[,1:2]
 names(state_population)[names(state_population) == 'STATE'] = "NAME"
 ```
 
-```{r, include=FALSE}
+```{r}
 state2 =state %>% filter(NAME %in% visitors_by_state$NAME)
 visitors_by_state2 = left_join(state2,visitors_by_state)
 visitors_by_state2$X2019 = as.numeric(gsub(",","",visitors_by_state2$X2019))
@@ -169,7 +169,7 @@ visitors_by_state3 = left_join(visitors_by_state2, state_population) %>%
   mutate(hawaii_travel_rate = X2019/POPESTIMATE2019)
 ```
 
-```{r, include=FALSE}
+```{r}
 library(sf)
 library(tmap)
 state2 =state %>% filter(NAME %in% visitors_by_state$NAME)
@@ -179,7 +179,7 @@ visitors_by_state2$X2019 = as.numeric(gsub(",","",visitors_by_state2$X2019))
 mainstate <-st_bbox(state %>% filter(NAME %in% visitors_by_state$NAME))
 ```
 
-```{r, warning = FALSE}
+```{r}
 tm_shape(visitors_by_state3, bbox = mainstate) +
   tm_polygons("hawaii_travel_rate", palette = "Reds",breaks = seq(0,.14,.01)) +
    tm_text("STUSPS", size = .5,remove.overlap =  T)+
