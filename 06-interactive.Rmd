@@ -6,4 +6,4 @@ VizHub is used for sharing D3 online. Here is the link:
 
 https://vizhub.com/yigechen17/80eb87afbeb8430bb1abf47518b3e286
 
-There is a short comment below the interactive plot. But for more information, please explore by your self. Have fun!
+There is a short comment below the interactive plot. But for more information, please explore by yourself. Have fun!
