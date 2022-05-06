@@ -1,5 +1,15 @@
 # Conclusion
 
-"Discuss: main takeaways of your exploration, limitations, future directions, lessons learned.
 
-(suggested: approximately 1/2 - 1 page)"
+
+From the our analysis, we have got several useful conclusions about our trip planning to Hawaii and could answer the three questions we have directly.
+
+Firstly, we might be too young to go to Hawaii for vacation. As we can see, most people who go to Hawaii are 40-50 years old, which means either Hawaii is more suitable for middle aged people, or the cost to go there is too much for young people to afford. If we really want to go to Hawaii for fun, we should choose Maui and Oahu island as our target destination as visitors in those two islands tend to be younger. As for the time of our trip, we should probably choose sometime between May to September.
+
+Secondly, for our travel plan, we should choose to go to Maui and Oahu island for vacation, and Maui especially as more people choose to spend more time there. If some of us wants to get married or spend a honeymoon, Oahu island could be a perfect choice. Molokai island is not a very good choice for traveling as most people go there for visiting friends or relatives, so as Lanai island because not a lot of people would go there. So these two places should be deleted from our destination list. For accommodation, we should choose to live in hotels in Oahu island, but could consider condos if we go to Maui island.
+
+Thirdly, the number of people traveling to Hawaii is greatly infected by the environment and economy. We see that much less people come for vacation during the economic crisis in 2008, and the pandemic in 2020. In 2020, there was nearly no tourist in Hawaii even during the most popular tourist season: May to September.
+
+Except from these findings, there are a lot of flaws in our report indeed. For example, we mainly used data in 2019 for analysis in question 1 and 2 due to the missing data in our dataset. This is not accurate enough as the tourist pattern could differ from year to year. If given more time and resource, we could make a report for each year and develop more precise conclusions. 
+
+In this report, we got a better understanding of how graphs could provide us with a more intuitive undrstanding of the data we have. From the process of making interactive plot, we prefect our debugging skills and became better at making html interactive graphics, which is a good practice for future preparation. 
