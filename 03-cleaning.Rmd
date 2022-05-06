@@ -3,7 +3,6 @@
 
 # Data transformation
 
-
 ```{r}
 # from chapter 2
 data1.0 <- read.csv("data/raw/1 visitor trend-不分state.csv")[-c(7:11),]
