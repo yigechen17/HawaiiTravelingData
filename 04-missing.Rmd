@@ -2,6 +2,7 @@
 
 # Missing values
 
+
 In this chapter, we discuss the pattern of missing values in our datasets. After carefully observing our data, we found out that data1, data2, data2.1, data3 do not have a lot of missing data. Even though they do, the missing pattern is pretty neat. Take data3 as an example, all the data from 1990 to 1997 are missing for indicators except from visitor arrivals. Therefore, we applied a heatmap for each of these datasets to show the missing patterns of the four datasets:
 
 ```{r}
