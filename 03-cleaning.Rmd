@@ -3,9 +3,6 @@
 
 # Data transformation
 
-"Describe the process of getting the data into a form in which you could work with it in R. If your code does not lend itself to being including in the .Rmd  file, provide a link to the folder or file(s) that contain(s) that code."
-
-
 
 ```{r}
 # from chapter 2
@@ -16,7 +13,9 @@ data3.0 <- read.csv("data/raw/3 destination.csv")[-c(29:32),]
 data4.0 <- read.csv("data/raw/4 Q2主要数据.csv")[-c(217:221),]
 ```
 
-To tidy our data, firstly we chose to convert all the blank observations into NAs using a helper function "empty_as_na". Then, we deleted redundant characters in the names of columns, for instance, all the "X"s in front of the years like "X2019". As there are a lot of missing values through the years, we may especially concern about the data since 2019 when analyzing the first two problems. We kept the data in year 2019 using "filter" command in tidyverse package. Our code is shown below
+To tidy our data, firstly we chose to convert all the blank observations into NAs using a helper function "empty_as_na". Then, we deleted redundant characters in the names of columns, for instance, all the "X"s in front of the years like "X2019". As there are a lot of missing values through the years, we may especially concern about the data since 2019 when analyzing the first two problems. We kept the data in year 2019 using "filter" command in tidyverse package.
+
+Except for changing column names, we also tried various ways to tidy our data. We mainly used pivot_longer, pivot_wider, mutate and filter to transform our data into the form that could be our best using. Eventually, the data is transformed pretty neat and is stored in the "clean" folder in our github respiratory "HawaiiTravelingData".
 
 The code of data transformation could be found in the link: https://github.com/Weijiaaaa/5293_r/blob/main/Final%20project%20Ch3%20data%20transformation
 

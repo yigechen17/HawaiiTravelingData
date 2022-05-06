@@ -80,7 +80,16 @@
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#summary"><i class="fa fa-check"></i><b>5.1</b> Summary</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#what-kind-of-people-would-come-to-hawaii"><i class="fa fa-check"></i><b>5.2</b> What kind of people would come to Hawaii?</a></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#why-do-people-come-here"><i class="fa fa-check"></i><b>5.3</b> Why do people come here?</a></li>
+<li class="chapter" data-level="5.4" data-path="results.html"><a href="results.html#where-do-people-live-during-their-visit"><i class="fa fa-check"></i><b>5.4</b> Where do people live during their visit?</a></li>
+<li class="chapter" data-level="5.5" data-path="results.html"><a href="results.html#which-island-is-more-popular"><i class="fa fa-check"></i><b>5.5</b> Which island is more popular?</a></li>
+<li class="chapter" data-level="5.6" data-path="results.html"><a href="results.html#how-does-the-total-expenditure-and-visitor-number-of-the-us-change-by-years-in-hawaii"><i class="fa fa-check"></i><b>5.6</b> How does the total expenditure and visitor number of the US change by years in Hawaii?</a></li>
+<li class="chapter" data-level="5.7" data-path="results.html"><a href="results.html#how-does-the-total-number-of-visitors-change-in-seasons"><i class="fa fa-check"></i><b>5.7</b> How does the total number of visitors change in seasons?</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -104,8 +113,8 @@
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation<a href="data-transformation.html#data-transformation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>“Describe the process of getting the data into a form in which you could work with it in R. If your code does not lend itself to being including in the .Rmd file, provide a link to the folder or file(s) that contain(s) that code.”</p>
-<p>To tidy our data, firstly we chose to convert all the blank observations into NAs using a helper function “empty_as_na”. Then, we deleted redundant characters in the names of columns, for instance, all the “X”s in front of the years like “X2019”. As there are a lot of missing values through the years, we may especially concern about the data since 2019 when analyzing the first two problems. We kept the data in year 2019 using “filter” command in tidyverse package. Our code is shown below</p>
+<p>To tidy our data, firstly we chose to convert all the blank observations into NAs using a helper function “empty_as_na”. Then, we deleted redundant characters in the names of columns, for instance, all the “X”s in front of the years like “X2019”. As there are a lot of missing values through the years, we may especially concern about the data since 2019 when analyzing the first two problems. We kept the data in year 2019 using “filter” command in tidyverse package.</p>
+<p>Except for changing column names, we also tried various ways to tidy our data. We mainly used pivot_longer, pivot_wider, mutate and filter to transform our data into the form that could be our best using. Eventually, the data is transformed pretty neat and is stored in the “clean” folder in our github respiratory “HawaiiTravelingData”.</p>
 <p>The code of data transformation could be found in the link: <a href="https://github.com/Weijiaaaa/5293_r/blob/main/Final%20project%20Ch3%20data%20transformation" class="uri">https://github.com/Weijiaaaa/5293_r/blob/main/Final%20project%20Ch3%20data%20transformation</a></p>
 
 </div>

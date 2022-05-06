@@ -3,5 +3,12 @@ data-sources
 data-transformation
 missing-values
 results
+summary
+what-kind-of-people-would-come-to-hawaii
+why-do-people-come-here
+where-do-people-live-during-their-visit
+which-island-is-more-popular
+how-does-the-total-expenditure-and-visitor-number-of-the-us-change-by-years-in-hawaii
+how-does-the-total-number-of-visitors-change-in-seasons
 interactive-component
 conclusion
