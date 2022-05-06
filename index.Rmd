@@ -4,7 +4,6 @@ author: "Yige Chen, WeiJia Wang"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
-
 # Introduction
 
 For this report, We are interested in taking Hawaii as our travel destination for the summer or spring break. As the tourism of Hawaii is well developed, we believe there should be enough data collected that can help us to explore the features and developments of the tourism of Hawaii. We believe if we can get answers to the questions, we can better plan our travel and have a better understanding about Hawaii tourism.
