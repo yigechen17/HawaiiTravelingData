@@ -4,7 +4,6 @@
 
 **Summary**
 
-
 From our analysis, we found out that most people come to Hawaii for vacation, and most of them would choose to come again. Additionally, we found people in the north and west US has a higher rate choosing Hawaii travel. As for the Accommodation choice, people tend to rest in hotels and condos. For the destination, Oahu island and Maui island are the most popular ones, while people would spend similar time spending in Oahu, Maui, Kona and Kauai island. Lanai island seems to be the least popular island among all. We have also found that visitors from Illinois, Idaho, Georgia, Florida and some other southern states could have a clustering pattern when it comes to their destinations. Considering the time, we found the huge impact of the financial crisis of 2008 and the pandemic to the visitor number and expenditure in Hawaii. There is a seasonality that July and March is the high season while January and September is the low season for Hawaii tourism.
 
 The graphs and comments are shown below. 
