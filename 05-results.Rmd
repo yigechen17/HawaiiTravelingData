@@ -2,6 +2,7 @@
 
 # Results
 
+## Summary
 From our analysis, we found out that most people come to Hawaii for vacation, and most of them would choose to come again. Additionally, we found people in the north and west US has a higher rate choosing Hawaii travel. As for the Accommodation choice, people tend to rest in hotels and condos. For the destination, Oahu island and Maui island are the most popular ones, while people would spend similar time spending in Oahu, Maui, Kona and Kauai island. Lanai island seems to be the least popular island among all. We have also found that visitors from Illinois, Idaho, Georgia, Florida and some other southern states could have a clustering pattern when it comes to their destinations. Considering the time, we found the huge impact of the financial crisis of 2008 and the pandemic to the visitor number and expenditure in Hawaii. There is a seasonality that July and March is the high season while January and September is the low season for Hawaii tourism.
 
 The graphs and comments are shown below. 
@@ -80,7 +81,7 @@ d4<- tibble(data4.0[,-c(4:19)][,c(1, 2, 8)])
 
 
 
-**1. What kind of people would come to Hawaii?**
+## What kind of people would come to Hawaii?
 
 We analyse this question by exploring the average age of people who come to Hawaii, the percentage of people who come more than one time, and the Hawaii travel rate of the states.
 
@@ -125,7 +126,7 @@ Apart from the features above, we are also curious about whether people from dif
 rawdata2 = read.csv("data/raw/2 visitor trend-bystate.csv")
 ```
 
-```{r}
+```{r, include = F}
 #tmap data preprocess
 visitors_by_state = rawdata2 %>% filter(Indicator == "Visitor arrivals", Destination == "Statewide")
 names(visitors_by_state)[names(visitors_by_state) == 'Market'] = "NAME"
@@ -148,19 +149,19 @@ visitors_by_state[,"NAME"][visitors_by_state[,"NAME"] == "W. Virginia"] <- "West
 ```
 
 
-```{r}
+```{r, include = F}
 # 2019 census-us-population-data-by-state
 #https://www.kaggle.com/datasets/peretzcohen/2019-census-us-population-data-by-state?resource=download
 
 state_population_raw = read.csv("data/raw/2019_Census_US_Population_Data_By_State_Lat_Long.csv")
 ```
 
-```{r}
+```{r, include = F}
 state_population = state_population_raw[,1:2]
 names(state_population)[names(state_population) == 'STATE'] = "NAME"
 ```
 
-```{r}
+```{r, include = F}
 state2 =state %>% filter(NAME %in% visitors_by_state$NAME)
 visitors_by_state2 = left_join(state2,visitors_by_state)
 visitors_by_state2$X2019 = as.numeric(gsub(",","",visitors_by_state2$X2019))
@@ -170,7 +171,7 @@ visitors_by_state3 = left_join(visitors_by_state2, state_population) %>%
   mutate(hawaii_travel_rate = X2019/POPESTIMATE2019)
 ```
 
-```{r}
+```{r, include = F}
 library(sf)
 library(tmap)
 state2 =state %>% filter(NAME %in% visitors_by_state$NAME)
@@ -219,7 +220,7 @@ ggparcoord(g1, columns = 2:8, scale = "center", alphaLines = .7, splineFactor = 
 From the plot we can see that there is no outlier in this dataset. However there are some obvious clusters shown in the plot. For example, Maine, New York, New Jersey, Utha and Vergina is clearly a cluster.To gain a better vision of the parallal coordinate plot, we applied an interactive parallel coordinates plot for the same data:
 
 
-**2. Why do people come here**
+## Why do people come here?
 
 Secondly, we are curious about the reason why people come to Hawaii:
 ```{r}
@@ -250,7 +251,7 @@ purpose %>%
 There are 4 major reasons for people to go to Hawaii islands: for vacation, to visit friends or relatives, for honeymoon or get married and for other purposes. From the plot we can see that most people go to Hawaii for vacation. The second major reason is that people go there to visit friends and relatives. Among the 6 islands, Molokai island has the most visitors who go there to visit friends and relatives, while Maui island has the least. The number of people that go to Oahu for honeymoon or get married is the most comparing to other islands.
 
 
-**3. Where do people live during their visit?**
+## Where do people live during their visit?
 
 Accommodation is also pretty important when we plan a trip. Should we rent a cabin, or should we live in a hotel? The accommodations that most people choose could be a safer choice for us.
 
@@ -281,7 +282,7 @@ Accom %>%
 From the stacked barchart we can see that the most popular accommodation is hotel and condos are pretty welcome too. Accommodation choices vary from island to island. For Oahu island, the percentage of people who live in hotel outperforms all the other islands, and for Maui island the number of people living in Condos outperforms other islands. 
 
 
-**4. Which island is more popular?**
+## Which island is more popular?
 
 Now we would like to decide which island we would like to go if our travel time is limit by plotting the number of visitors and the length of them to stay in different islands.
 
@@ -332,7 +333,7 @@ interactive
 
 From this interactive plot, the clustering pattern is much easier to observe. For example, Now we can see that Texas, Oklahoma, Kansas, Lowa and Connecicut are clearly a cluster as people from these states would all like to go to Kauai and Kona island instead of Oahu and Maui island.
 
-**5. How does the total expenditure and visitor number of the US change by years in Hawaii?**
+## How does the total expenditure and visitor number of the US change by years in Hawaii?
 
 The goal of this part is to plot the expenditure and visitor number over time and find some long-term trends or patterns.
 
@@ -372,7 +373,7 @@ g
 We can find the US total expenditure in Hawaii mainly follows a increasing trend. Possible reasons can be the thrive of the tourism in Hawaii and inflation. There is a notable decrease in the US total expenditure from 2007 to 2009. Similar to our homework question, the financial crisis of 2008 may be able to explain this decrease. And the expenditure data of 2020 is missing for some reason, which makes us unable to check the influence of the pandemic to the US total expenditure. But at least we can see the expenditure of 2021 still followed the increase trend.
 Similarly, the US total visitors in Hawaii also follows a increasing trend with the same decrease from 2007 to 2009. This time we have the 2020 data. And we can find there did exist a huge decrease in the number of visitors to Hawaii on 2020. The pandemic had a great influence to the visitor number.
 
-**6. How does the total number of visitors change in seasons?**
+## How does the total number of visitors change in seasons?
 After looking at the long-term trend in the previous section, we want to see some seasonality here. We will plot and compare the total number of visitors versus months.
 
 ```{r}

@@ -7,7 +7,7 @@ site: bookdown::bookdown_site
 
 # Introduction
 
-For this report, We are interested in taking Hawaii as our travel destination for summer or spring break. As the tourism of Hawaii is well developed, we believe there should be enough data collected that can help us to explore the development of the tourism of Hawaii.
+For this report, We are interested in taking Hawaii as our travel destination for the summer or spring break. As the tourism of Hawaii is well developed, we believe there should be enough data collected that can help us to explore the features and developments of the tourism of Hawaii. We believe if we can get answers to the questions, we can better plan our travel and have a better understanding about Hawaii tourism.
 
 Here we come up with three questions:
 
@@ -19,8 +19,9 @@ Here we come up with three questions:
 
 To help solve the problems, we searched Hawaii Tourism public data on Google and found a tourism data warehouse that enables us to customize and download data sets about Hawaii’s tourism industry in difference perspectives. We believe the open data website contains enough information for us to answer our questions, for example:
 
-For question 1, we can explore the features of tourists by downloading data sets containing their basic information like age, gender, departure place, travel purposes, their daily expenditure in Hawaii, etc.. If it is the majority of visitors are younger people who come from all over the world (meaning a safe place), the money their average expenditure is not high for us, then maybe we could consider Hawaii as a affordable destination.
+For question 1, we can explore the features of tourists by downloading data sets containing their basic information like age, gender, departure place, travel purposes, their daily expenditure in Hawaii, etc.. If it is the majority of visitors are younger people from the US and their average expenditure is not high, then maybe we could consider Hawaii as a affordable destination.
+("Gender" data was later found not existed.)
 
-For question 2, we can make the travel plan based on what islands do most people go, what activities do they do on each island and the average time they spend there. All these data could be found on the official data website.
+For question 2, we can make the travel plan based on what islands do most people go, what activities do they do on each island and the average time they spend there. All these data could be found on the official data website. And our main focus is the comparison between the islands of Hawaii.
 
-For question 3, we may explore this question by studying if the answers of the two previous questions (or the pattern of the two data sets) have changed in the past two years. Since we have all the data from 1990 to 2021, we may not be limited to the pandemic period, but to do the data analyse for the whole time period.
+For question 3, we may explore this question by studying if the answers of the two previous questions (or the pattern of the two data sets) have some odd changes or patterns in the past two years. Since we have the data from 1990 to 2021 (some are missing), we may not be limited to the pandemic period, but to do the data analyse for the whole time period about the trends and seasonality.
